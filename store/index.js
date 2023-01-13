@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 
 import auth from '~/store/modules/auth'
 import riddle from '~/store/modules/riddle'
+import solution from '~/store/modules/solution'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -15,7 +16,8 @@ const createStore = () => {
     },
     modules: {
       auth,
-      riddle
+      riddle,
+      solution
     }
   })
 }

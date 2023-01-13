@@ -18,7 +18,7 @@
           />
         </v-card-text>
         <v-card-actions class="d-flex justify-end pt-0 px-4 pb-4">
-          <v-btn color="green"><v-icon class="pr-2">mdi-send</v-icon>Submit</v-btn>
+          <v-btn color="green" @click="submit"><v-icon class="pr-2">mdi-send</v-icon>Submit</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -33,7 +33,10 @@ export default {
       .catch((error) => {
         console.log(error)
       })
-    return { riddleData }
+    return {
+      id: context.params.id,
+      riddleData
+    }
   },
   data () {
     return {
@@ -49,6 +52,12 @@ export default {
     }
   },
   methods: {
+    async submit() {
+      await this.$store.dispatch('answer', { payload: { answer: this.answer }, id: this.id })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 }
 </script>

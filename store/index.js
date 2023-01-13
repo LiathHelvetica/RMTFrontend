@@ -1,5 +1,8 @@
 import Vuex from 'vuex'
 
+import auth from '~/store/modules/auth'
+import riddle from '~/store/modules/riddle'
+
 const createStore = () => {
   return new Vuex.Store({
     state () {
@@ -11,6 +14,8 @@ const createStore = () => {
     mutations: {
     },
     modules: {
+      auth,
+      riddle
     }
   })
 }

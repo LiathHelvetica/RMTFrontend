@@ -30,8 +30,16 @@
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title class="main-icon" @click="goToMainPage">
+        <div class="d-flex">
+          <v-icon class="pr-2">mdi-puzzle</v-icon>
+          <div>{{ title }}</div>
+        </div>
+      </v-toolbar-title>
       <v-spacer />
+      <v-btn icon @click="goToMe">
+        <v-icon>mdi-account</v-icon>
+      </v-btn>
       <v-btn icon @click="logout">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
@@ -70,14 +78,9 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-note-multiple',
-          title: 'ROOT',
-          to: '/'
-        },
-        {
-          icon: 'mdi-earth',
-          title: 'PATH-1',
-          to: '/path-1'
+          icon: 'mdi-plus',
+          title: 'Add riddle',
+          to: '/riddle/create'
         }
       ],
       miniVariant: false,
@@ -88,9 +91,21 @@ export default {
   },
   methods: {
     logout () {
-      // TODO: ???
+      localStorage.removeItem('token')
       this.$router.push('/login')
+    },
+    goToMe () {
+      this.$router.push('/me')
+    },
+    goToMainPage () {
+      this.$router.push('/')
     }
   }
 }
 </script>
+
+<style scoped>
+.main-icon {
+  cursor: pointer;
+}
+</style>

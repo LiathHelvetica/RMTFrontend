@@ -3,10 +3,16 @@
     <v-card :style="cardWidth" elevation="5" outlined shaped class="pa-4">
       <v-card-title>Register</v-card-title>
       <v-text-field
-        id="login"
-        v-model="login"
-        label="e-mail"
+        id="userName"
+        v-model="userName"
+        label="Username"
         prepend-icon="mdi-account"
+      />
+      <v-text-field
+        id="login"
+        v-model="email"
+        label="e-mail"
+        prepend-icon="mdi-email"
       />
       <v-text-field
         id="password"
@@ -37,9 +43,10 @@ export default {
   layout: 'empty',
   data () {
     return {
-      login: '',
+      email: '',
       password: '',
       password2: '',
+      userName: '',
       widthsForBreakpoints: {
         xs: 90,
         sm: 70,
@@ -56,7 +63,6 @@ export default {
       }
     }
   },
-  // TODO: Add frontside password/login verification
   methods: {
     doRegister () {
       if (this.password !== this.password2) {
@@ -64,9 +70,13 @@ export default {
         return
       }
       this.$store
-        .dispatch('register', { username: this.login.trim(), password: this.password.trim() })
+        .dispatch('register', {
+          email: this.email.trim(),
+          password: this.password.trim(),
+          userName: this.userName.trim()
+        })
         .then(() => {
-          this.$router.push('/')
+          this.$router.push('/login') // TODO: success info
         })
         .catch((error) => {
           console.log(error)
